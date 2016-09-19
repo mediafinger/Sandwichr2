@@ -1,6 +1,6 @@
 module Api
   class SandwichesController < ApplicationController
-    before_action :ensure_sandwich, only: [:show, :update]
+    before_action :ensure_sandwich, only: [:show, :update, :destroy]
 
     def index
       sandwiches = Sandwich.all
@@ -27,6 +27,10 @@ module Api
       else
         render json: { errors: @sandwich.errors.full_messages }, status: 422
       end
+    end
+
+    def destroy
+      render json: @sandwich.destroy
     end
 
     private
