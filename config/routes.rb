@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  resources :sandwiches, only: [:index, :show]
+  namespace :api do
+    resources :sandwiches, only: [:index, :show]
+  end
 end
