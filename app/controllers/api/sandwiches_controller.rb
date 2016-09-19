@@ -6,13 +6,22 @@ module Api
     end
 
     def show
-      sandwich = Sandwich.find(params[:id])
-      render json: sandwich
+      sandwich = Sandwich.find_by(id: params[:id])
+      if sandwich.present?
+        render json: sandwich, status: :ok
+      else
+        render json: { errors: "Sandwich with id #{params[:id]} not found"}, status: 404
+      end
     end
 
     def create
-      sandwich = Sandwich.create(sandwich_params)
-      render json: sandwich
+      sandwich = Sandwich.new(sandwich_params)
+
+      if sandwich.save
+        render json: sandwich, status: :created
+      else
+        render json: { errors: sandwich.errors.full_messages }, status: 422
+      end
     end
 
     private
