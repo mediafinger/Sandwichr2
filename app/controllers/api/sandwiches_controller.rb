@@ -9,5 +9,16 @@ module Api
       sandwich = Sandwich.find(params[:id])
       render json: sandwich
     end
+
+    def create
+      sandwich = Sandwich.create(sandwich_params)
+      render json: sandwich
+    end
+
+    private
+
+    def sandwich_params
+      params.require(:sandwich).permit(:name, :bread_type)
+    end
   end
 end
