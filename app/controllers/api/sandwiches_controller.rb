@@ -3,7 +3,7 @@ module Api
     before_action :ensure_sandwich, only: [:show, :update, :destroy]
 
     def index
-      sandwiches = Sandwich.all
+      sandwiches = Sandwich.all.limit(1000)
       render json: sandwiches
     end
 
